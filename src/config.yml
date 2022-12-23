@@ -1,0 +1,20 @@
+prefix: '&l&7[&6&lWBFCore&7&l]'
+welcomeMessages:
+  - ''
+  - '               &7Witam Cię &6%PLAYERNAME% &7na &6WBF Survival       '
+  - ''
+  - '         &7Wpisz &6/help&7 aby uzyskać podstawowe info!        '
+  - '    &6/discord &7aby dołączyć do naszej społeczności!    '
+  - ''
+  - ''
+motd: '&l&7[&6&lWBFCore&7&l] &7Pytasz &6dzika &7czy &6sra &7w lesie....'
+discord-inv-link: https://discord.gg/e6Zs4mHe
+spawn:
+  world: world
+  x: -341.61794063546535
+  y: 76.0
+  z: -431.97455493788124
+  yaw: 179.25922
+  pitch: 10.499451
+
+homesLimit: 5

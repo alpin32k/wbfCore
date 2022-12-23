@@ -1,0 +1,32 @@
+api-version: 1.19
+name: WBFCore
+main: alpine.wbf.core.Core
+version: 1.6.0 Beta
+authors: [ ALPINE ]
+description: Core Plugin for survival server [WBF]
+commands:
+  help:
+    description: Pokazuje wszystkie dostępne dla Ciebie komendy
+  discord:
+    description: Link do naszego discorda
+  openinv:
+    description: Otwiera ekwipunek gracza
+    permission: wbfCore.admin.open.inv
+  openechest:
+    description: Otwiera enderchest gracza
+    permission: wbfCore.admin.open.enderchest
+  craft:
+    description: Otwiera przenośny crafting table
+    permission: wbfCore.craft
+  spawn:
+    description: Otwiera przenośny crafting table
+#    permission: wbfCore.teleport.spawn
+  setspawn:
+    description: Otwiera przenośny crafting table
+    permission: wbfCore.teleport.setspawn
+  home:
+    description: Zarządzenie własnymi teleportami
+    permission: wbfCore.teleport.home
+  sethome:
+    description: Dodawanie własnego teleportu
+    permission: wbfCore.teleport.home
