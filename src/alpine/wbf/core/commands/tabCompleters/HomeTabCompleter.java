@@ -16,8 +16,11 @@ public class HomeTabCompleter implements TabCompleter {
 
             if(args.length == 1){
                 homeArguments.add("add");
+                homeArguments.add("dodaj");
                 homeArguments.add("del");
+                homeArguments.add("usun");
                 homeArguments.add("list");
+                homeArguments.add("lista");
             }
 
             return homeArguments;

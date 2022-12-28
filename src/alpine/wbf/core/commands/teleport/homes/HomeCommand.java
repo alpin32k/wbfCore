@@ -19,13 +19,13 @@ public class HomeCommand implements CommandExecutor {
         }
 
         if (args.length == 0 || args.length > 2) {
-            Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
+            Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add/dodaj | del/usun | list/lista> [name]");
             return true;
         }
 
         CorePlayer user = Core.getPlayersManager().getUser(player);
 
-        if(args[0].toLowerCase().equals("list")) {
+        if(args[0].toLowerCase().equals("list") || args[0].toLowerCase().equals("lista")) {
             StringBuilder sb = new StringBuilder();
             for (String string : user.getHomes().keySet()) {
                 sb.append(string).append("&7,&6 ");
@@ -42,9 +42,9 @@ public class HomeCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[0].toLowerCase().equals("add")) {
+        if(args[0].toLowerCase().equals("add") || args[0].toLowerCase().equals("dodaj")) {
             if(args.length == 1){
-                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
+                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add/dodaj | del/usun | list/lista> [name]");
                 return true;
             }
             int homeAmount = user.getHomeAmount(player);
@@ -71,9 +71,9 @@ public class HomeCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[0].toLowerCase().equals("del")) {
+        if(args[0].toLowerCase().equals("del") || args[0].toLowerCase().equals("usun") || args[0].toLowerCase().equals("remove")) {
             if(args.length == 1){
-                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
+                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add/dodaj | del/usun | list/lista> [name]");
                 return true;
             }
             String homeName = args[1].toLowerCase();
