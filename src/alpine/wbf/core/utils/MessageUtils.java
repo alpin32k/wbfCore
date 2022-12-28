@@ -12,12 +12,12 @@ public class MessageUtils {
         return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
-    public static void sendMessage(Player player, String message)
+    public static void sendMessage(CommandSender player, String message)
     {
         player.sendMessage(colorize(message));
     }
 
-    public static void sendPrefixedMessage(Player player, String message) {
+    public static void sendPrefixedMessage(CommandSender player, String message) {
         player.sendMessage(colorize(Core.getCoreConfig().prefix + " " + message));
 
     }

@@ -101,13 +101,9 @@ public enum Messages {
     CLEAR_SUCCESS("&aYour inventory has been cleared.", true),
     CLEAR_OTHER_SUCCESS("&e{1}&a's inventory has been cleared.", true),
 
-//    PTIME_GET("&aThe current server time is &e{1}&a, and your current player time is &e{2}&a."),
-//    PTIME_RESET("&aYour clock has been reset to the server's global time."),
-//    PTIME_SET("&aYour clock has been set to &e{1}&a."),
+    TIME_SET("&aPomyślnie &7ustawiono czas na serwerze na: &6{1}&7.", true),
 
-//    PWEATHER_GET("&aYour current player weather is &e{1}&a."),
-//    PWEATHER_RESET("&aYour weather has been reset to the server's global weather."),
-//    PWEATHER_SET("&aYour weather has been set to &e{1}&a."),
+    WEATHER_SET("&aPomyślnie &7ustawiono pogodę na: &6{1}&7.", true),
 
     CRAFT_SUCCESS("&7Otwieranie przenośnego craftingu", true),
 //
@@ -165,7 +161,7 @@ public enum Messages {
         this.prefixed = prefixed;
     }
 
-    public void send(Player player, String... args) {
+    public void send(CommandSender player, String... args) {
         if (prefixed) {
             MessageUtils.sendPrefixedMessage(player, doArgs(player, args));
         } else {
