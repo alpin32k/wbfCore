@@ -12,43 +12,38 @@ import org.bukkit.entity.Player;
 public class HomeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player player = (Player) sender;
 
         if (!(sender instanceof Player)) {
             Messages.CONSOLE_SENDER_ERROR.send((Player) sender);
             return true;
         }
+
         if (args.length == 0 || args.length > 2) {
-            Messages.INVALID_ARGS.send((Player) sender, "/" + label + " <nazwa domu | add | del | list> [name]");
+            Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
             return true;
         }
 
-        Player p = (Player) sender;
+        CorePlayer user = Core.getPlayersManager().getUser(player);
 
-        CorePlayer cp = Core.getPlayersManager().getUser(p);
         if(args[0].toLowerCase().equals("list")) {
             StringBuilder sb = new StringBuilder();
-            for (String string : cp.getHomes().keySet()) {
+            for (String string : user.getHomes().keySet()) {
                 sb.append(string).append("&7,&6 ");
             }
             if (sb.length() <= 0) {
-                Messages.HOME_NONE.send(p);
+                Messages.HOME_NONE.send(player);
                 return true;
             }
 
             String built = sb.toString().trim();
             built = built.substring(0, built.length() - 3);
-            Messages.HOME_LIST.send(p, built);
+            Messages.HOME_LIST.send(player, built);
 
             return true;
         }
 
-        Player player = (Player) sender;
-        CorePlayer user = Core.getPlayersManager().getUser(player);
-
         if(args[0].toLowerCase().equals("add")) {
-
-
-
             int homeAmount = user.getHomeAmount(player);
             String homeName = args[1].toLowerCase();
 
@@ -58,16 +53,18 @@ public class HomeCommand implements CommandExecutor {
             }
 
             if (user.getHomes().containsKey(homeName)) {
-                user.getHomes().remove(homeName);
+//                user.getHomes().remove(homeName);
+                Messages.SETHOME_BUSY_NAME.send(player, homeName);
+                return true;
             }
 
             if (user.getHomes().size() >= homeAmount) {
-                Messages.SETHOME_LIMIT.send((Player) sender, homeAmount + "");
+                Messages.SETHOME_LIMIT.send(player, homeAmount + "");
                 return true;
             }
 
             user.getHomes().put(homeName, player.getLocation());
-            Messages.SETHOME_SUCCESS.send((Player) sender, homeName);
+            Messages.SETHOME_SUCCESS.send(player, homeName);
             return true;
         }
 
@@ -76,10 +73,10 @@ public class HomeCommand implements CommandExecutor {
 
             if (user.getHomes().containsKey(homeName)) {
                 user.getHomes().remove(homeName);
-                Messages.DELHOME_SUCCESS.send((Player) sender, homeName);
+                Messages.DELHOME_SUCCESS.send(player, homeName);
                 return true;
             }
-            Messages.DELHOME_INVALID.send((Player) sender, homeName);
+            Messages.DELHOME_INVALID.send(player, homeName);
             return true;
         }
 

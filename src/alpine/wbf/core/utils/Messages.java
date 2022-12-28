@@ -116,6 +116,7 @@ public enum Messages {
     SETHOME_LIMIT("&cOsiągnąłeś limit: &7{1}&c swoich domów!"),
     SETHOME_SUCCESS("&aPomyślnie&7 zapisałeś dom: &6{1}&7.", true),
     SETHOME_INVALID_NAME("&cNie możesz użyc nazwy &6{1}&c!", true),
+    SETHOME_BUSY_NAME("&cNie możesz użyc nazwy &6{1}&c (nazwa zajęta)!", true),
 
     HOME_INVALID("&cNie masz takiego domu!", true),
     HOME_SUCCESS("&7Teleportujesz się do domu: &6{1}&7...", true),
