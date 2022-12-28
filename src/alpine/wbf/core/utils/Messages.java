@@ -27,6 +27,12 @@ public enum Messages {
     SPAWN_MISSING("&cSpawn nie został ustawiony!", true),
     SPAWN_TELEPORT("&7Zostałes przeteleportowany na spawn!", true),
 
+    //TELEPORT WRAPPER MESSAGES
+
+    TELEPORT_WRAPPER_TELEPORTED("&7Zostałes przeteleportowany na &6{1}&7!", true),
+    TELEPORT_WRAPPER_MOVED("&cRuszyłeś się! Teleport na &6{1}&c został anulowany!", true),
+    TELEPORT_WRAPPER_QUEUE("&7Zostaniesz przeniesiony za &6{1}&7 ({2})", true),
+
 //    WARP_LIST("Warps: {1}", true),
 //    WARP_SUCCESS("You have warped to {1}.", true),
 //    WARP_NO_PERMISSION("You do not have permission to warp here!", true),

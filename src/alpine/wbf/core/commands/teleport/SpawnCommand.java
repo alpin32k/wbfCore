@@ -1,6 +1,7 @@
 package alpine.wbf.core.commands.teleport;
 
 import alpine.wbf.core.Core;
+import alpine.wbf.core.managers.TeleportManager;
 import alpine.wbf.core.utils.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,8 +25,9 @@ public class SpawnCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
 
-        player.teleport(Core.getTeleportManager().spawnLocation);
-        Messages.SPAWN_TELEPORT.send(player);
+        TeleportManager tm = Core.getTeleportManager();
+
+        tm.teleportPlayer("spawn", player, tm.spawnLocation, 5);
         return true;
     }
 }

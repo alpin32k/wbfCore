@@ -1,7 +1,9 @@
 package alpine.wbf.core.managers;
 
 import alpine.wbf.core.Core;
+import alpine.wbf.core.commands.teleport.TeleportWrapper;
 import alpine.wbf.core.data.CFile;
+import alpine.wbf.core.utils.Messages;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,9 +18,9 @@ public class TeleportManager {
 
     private final CFile configFile;
     @Getter
-    public HashMap<UUID, Long>     teleportQueue = new HashMap<UUID, Long>();
+    public HashMap<UUID, TeleportWrapper>   teleportQueue = new HashMap<UUID, TeleportWrapper>();
     @Getter
-    public HashMap<UUID, Location> lastTeleports = new HashMap<UUID, Location>();
+    public HashMap<UUID, Location>          lastTeleports = new HashMap<UUID, Location>();
 
     public Location spawnLocation;
 
@@ -27,21 +29,48 @@ public class TeleportManager {
     {
         this.configFile = Core.getCoreConfig().getConfigFile();
         loadSpawn();
+        createTeleportTask();
     }
 
-    public void teleportPlayer(Player player, Location playerLoc, Location toTeleport, Integer cooldown)
+    public void teleportPlayer(String teleportName, Player player, Location toTeleport, Integer cooldown)
     {
         lastTeleports.putIfAbsent(player.getUniqueId(), player.getLocation());
-        this.getTeleportQueue().putIfAbsent(player.getUniqueId(), System.currentTimeMillis());
+
+        TeleportWrapper tw = new TeleportWrapper(teleportName, player, player.getLocation(), toTeleport, cooldown);
+
+        this.getTeleportQueue().putIfAbsent(player.getUniqueId(), tw);
     }
 
 
     private void createTeleportTask()
     {
-        Core.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(Core.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                Bukkit.getConsoleSender().sendMessage();
+        Bukkit.getScheduler().runTaskTimer(Core.getInstance(), () ->
+        {
+            for (Map.Entry<UUID, TeleportWrapper> entry : teleportQueue.entrySet())
+            {
+                final Player player = Bukkit.getPlayer(entry.getKey());
+                final TeleportWrapper teleportWrapper = entry.getValue();
+                assert player != null;
+
+                if (!teleportWrapper.hasMoved())
+                {
+                    if (teleportWrapper.getCountdown() == 0)
+                    {
+                        player.teleport(teleportWrapper.getToTeleport());
+                        Messages.TELEPORT_WRAPPER_TELEPORTED.send(player, teleportWrapper.teleportName);
+                        teleportQueue.remove(player.getUniqueId());
+                    }
+                    else
+                    {
+                        Messages.TELEPORT_WRAPPER_QUEUE.send(player, teleportWrapper.getCountdown().toString(), teleportWrapper.teleportName);
+                        teleportWrapper.decreaseCountdown();
+                    }
+                }
+                else
+                {
+                    Messages.TELEPORT_WRAPPER_MOVED.send(player, teleportWrapper.teleportName);
+                    teleportQueue.remove(player.getUniqueId());
+                }
             }
         }, 0L, 20L);
     }
