@@ -13,6 +13,7 @@ import alpine.wbf.core.data.CoreConfig;
 import alpine.wbf.core.listeners.onPingEvent;
 import alpine.wbf.core.listeners.onPlayerJoinEvent;
 import alpine.wbf.core.listeners.onPlayerLeaveEvent;
+import alpine.wbf.core.listeners.onPlayerRespawnEvent;
 import alpine.wbf.core.managers.PlayersManager;
 import alpine.wbf.core.managers.TeleportManager;
 import alpine.wbf.core.utils.MessageUtils;
@@ -68,6 +69,7 @@ public class Core extends JavaPlugin {
         pluginManager.registerEvents(new onPlayerJoinEvent(), this);
         pluginManager.registerEvents(new onPlayerLeaveEvent(), this);
         pluginManager.registerEvents(new onPingEvent(), this);
+        pluginManager.registerEvents(new onPlayerRespawnEvent(), this);
 
         this.logToConsole("&2Events load successful");
     }
