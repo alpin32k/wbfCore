@@ -26,13 +26,13 @@ public class WeatherCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("rain")) {
-            player.getWorld().setTime(0);
+            player.getWorld().setWeatherDuration(60);
             Messages.WEATHER_SET.send(player, "deszczową");
             return true;
         }
 
         if (args[0].equalsIgnoreCase("clear")) {
-            player.getWorld().setTime(6000);
+            player.getWorld().setClearWeatherDuration(600);
             Messages.WEATHER_SET.send(player, "słoneczną");
             return true;
         }
