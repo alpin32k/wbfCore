@@ -11,12 +11,12 @@ public class CraftCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!sender.hasPermission("wbfCore.craft")){
-            Messages.PERMISSION_DENIED.send((Player) sender);
+            Messages.PERMISSION_DENIED.send(sender);
             return false;
         }
 
         if(!(sender instanceof Player)) {
-            Messages.CONSOLE_SENDER_ERROR.send((Player) sender);
+            Messages.CONSOLE_SENDER_ERROR.send(sender);
             return false;
         }
 

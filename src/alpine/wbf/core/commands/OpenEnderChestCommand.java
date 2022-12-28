@@ -13,18 +13,19 @@ public class OpenEnderChestCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(sender instanceof Player) {
+            Player p = (Player) sender;
+
+
             if(!sender.hasPermission("wbfCore.admin.open.enderchest")){
-//                MessageUtils.sendMessage((Player) sender, Messages.PERMISSION_DENIED.getValue());
+                Messages.PERMISSION_DENIED.send(p);
                 return true;
             }
 
-            Player p = (Player) sender;
 
             if(args.length == 0) p.openInventory(p.getEnderChest());
 
             if(args.length == 1){
                 if(!p.hasPermission("wbfCore.admin.open.enderchest.other")) {
-//                    MessageUtils.sendMessage(p, Messages.PERMISSION_DENIED.getValue());
                     Messages.PERMISSION_DENIED.send(p);
                     return false;
                 }
@@ -35,15 +36,15 @@ public class OpenEnderChestCommand implements CommandExecutor {
                 }
 
                 p.openInventory(target.getEnderChest());
-                Messages.ECHEST_OPEN_OTHER.send((Player) sender, target.getName());
+                Messages.ECHEST_OPEN_OTHER.send(sender, target.getName());
                 return true;
             }
             return true;
         }else{
-            Messages.CONSOLE_SENDER_ERROR.send((Player) sender);
+            Messages.CONSOLE_SENDER_ERROR.send(sender);
         }
 
-        Messages.INVALID_ARGS.send((Player) sender, "/" + label + " &3[player]");
+        Messages.INVALID_ARGS.send(sender, "/" + label + " &3[player]");
         return false;
     }
 }

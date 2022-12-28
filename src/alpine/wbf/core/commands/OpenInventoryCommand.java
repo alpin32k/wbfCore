@@ -12,13 +12,15 @@ public class OpenInventoryCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(sender instanceof Player) {
+            Player p = (Player) sender;
+
             if(!sender.hasPermission("wbfCore.admin.open.inventory")){
-                Messages.PERMISSION_DENIED.send((Player) sender);
+                Messages.PERMISSION_DENIED.send(sender);
 
                 return true;
             }
 
-            Player p = (Player) sender;
+
 
             if(args.length == 0) p.openInventory(p.getInventory());
 
@@ -34,15 +36,15 @@ public class OpenInventoryCommand implements CommandExecutor {
                 }
 
                 p.openInventory(target.getInventory());
-                Messages.INVSEE_OPEN.send((Player) sender, target.getName());
+                Messages.INVSEE_OPEN.send(sender, target.getName());
                 return true;
             }
             return true;
         }else{
-            Messages.CONSOLE_SENDER_ERROR.send((Player) sender);
+            Messages.CONSOLE_SENDER_ERROR.send(sender);
         }
 
-        Messages.INVALID_ARGS.send((Player) sender, "/" + label + " &3[player]");
+        Messages.INVALID_ARGS.send(sender, "/" + label + " &3[player]");
         return false;
     }
 }
