@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +39,7 @@ public class TeleportManager {
         lastTeleports.putIfAbsent(player.getUniqueId(), player.getLocation());
 
         TeleportWrapper tw = new TeleportWrapper(teleportName, player, player.getLocation(), toTeleport, cooldown);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1), true);
 
         this.getTeleportQueue().putIfAbsent(player.getUniqueId(), tw);
     }
@@ -59,6 +62,7 @@ public class TeleportManager {
                         player.teleport(teleportWrapper.getToTeleport());
                         Messages.TELEPORT_WRAPPER_TELEPORTED.send(player, teleportWrapper.teleportName);
                         teleportQueue.remove(player.getUniqueId());
+                        player.removePotionEffect(PotionEffectType.CONFUSION);
                     }
                     else
                     {
@@ -70,6 +74,7 @@ public class TeleportManager {
                 {
                     Messages.TELEPORT_WRAPPER_MOVED.send(player, teleportWrapper.teleportName);
                     teleportQueue.remove(player.getUniqueId());
+                    player.removePotionEffect(PotionEffectType.CONFUSION);
                 }
             }
         }, 0L, 20L);
