@@ -33,7 +33,7 @@ public class TimeCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("noon")) {
             player.getWorld().setTime(6000);
-            Messages.TIME_SET.send(player, "wieczór (600)");
+            Messages.TIME_SET.send(player, "wieczór (6000)");
             return true;
         }
 
