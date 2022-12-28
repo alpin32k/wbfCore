@@ -1,7 +1,7 @@
 api-version: 1.19
 name: WBFCore
 main: alpine.wbf.core.Core
-version: 1.6.0 Beta
+version: 2.0 beta
 authors: [ ALPINE ]
 description: Core Plugin for survival server [WBF]
 commands:
