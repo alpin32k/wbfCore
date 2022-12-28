@@ -30,3 +30,9 @@ commands:
   sethome:
     description: Dodawanie własnego teleportu
     permission: wbfCore.teleport.home
+  time:
+    description: Ustawianie czasu na serwerze
+    permission: wbfCore.time
+  weather:
+    description: Ustawianie pogody na serwerze
+    permission: wbfCore.weather

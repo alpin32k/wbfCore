@@ -2,6 +2,8 @@ package alpine.wbf.core;
 
 import alpine.wbf.core.commands.*;
 import alpine.wbf.core.commands.tabCompleters.HomeTabCompleter;
+import alpine.wbf.core.commands.tabCompleters.TimeTabCompleter;
+import alpine.wbf.core.commands.tabCompleters.WeatherTabCompleter;
 import alpine.wbf.core.commands.teleport.BackCommand;
 import alpine.wbf.core.commands.teleport.SetSpawnCommand;
 import alpine.wbf.core.commands.teleport.SpawnCommand;
@@ -86,6 +88,13 @@ public class Core extends JavaPlugin {
 //        Ilość domków zależna od permisji wbfCore.teleport.homes.<ilosc> do 100 max
         this.getCommand("home").setExecutor(new HomeCommand());
         this.getCommand("home").setTabCompleter(new HomeTabCompleter());
+
+
+        this.getCommand("time").setExecutor(new TimeCommand());
+        this.getCommand("time").setTabCompleter(new TimeTabCompleter());
+
+        this.getCommand("weather").setExecutor(new WeatherCommand());
+        this.getCommand("weather").setTabCompleter(new WeatherTabCompleter());
 
         this.getCommand("sethome").setExecutor(new SetHomeCommand());
 
