@@ -1,7 +1,6 @@
 package alpine.wbf.core.commands.teleport.homes;
 
 import alpine.wbf.core.Core;
-import alpine.wbf.core.commands.teleport.TeleportWrapper;
 import alpine.wbf.core.data.CorePlayer;
 import alpine.wbf.core.utils.Messages;
 import org.bukkit.command.Command;
@@ -44,6 +43,10 @@ public class HomeCommand implements CommandExecutor {
         }
 
         if(args[0].toLowerCase().equals("add")) {
+            if(args.length == 1){
+                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
+                return true;
+            }
             int homeAmount = user.getHomeAmount(player);
             String homeName = args[1].toLowerCase();
 
@@ -69,6 +72,10 @@ public class HomeCommand implements CommandExecutor {
         }
 
         if(args[0].toLowerCase().equals("del")) {
+            if(args.length == 1){
+                Messages.INVALID_ARGS.send(player, "/" + label + " <nazwa domu | add | del | list> [name]");
+                return true;
+            }
             String homeName = args[1].toLowerCase();
 
             if (user.getHomes().containsKey(homeName)) {
