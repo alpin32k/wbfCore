@@ -17,15 +17,15 @@ public class HomeCommand implements CommandExecutor {
             Messages.CONSOLE_SENDER_ERROR.send((Player) sender);
             return true;
         }
-        if (args.length > 2) {
-            Messages.INVALID_ARGS.send((Player) sender, "/" + label + " <nazwa home | add | del> [name]");
+        if (args.length == 0 || args.length > 2) {
+            Messages.INVALID_ARGS.send((Player) sender, "/" + label + " <nazwa domu | add | del | list> [name]");
             return true;
         }
 
         Player p = (Player) sender;
 
         CorePlayer cp = Core.getPlayersManager().getUser(p);
-        if(args.length == 0) {
+        if(args[0].toLowerCase().equals("list")) {
             StringBuilder sb = new StringBuilder();
             for (String string : cp.getHomes().keySet()) {
                 sb.append(string).append("&7,&6 ");
@@ -36,7 +36,7 @@ public class HomeCommand implements CommandExecutor {
             }
 
             String built = sb.toString().trim();
-            built = built.substring(0, built.length() - 1);
+            built = built.substring(0, built.length() - 3);
             Messages.HOME_LIST.send(p, built);
 
             return true;
@@ -46,8 +46,16 @@ public class HomeCommand implements CommandExecutor {
         CorePlayer user = Core.getPlayersManager().getUser(player);
 
         if(args[0].toLowerCase().equals("add")) {
+
+
+
             int homeAmount = user.getHomeAmount(player);
             String homeName = args[1].toLowerCase();
+
+            if(homeName.equals("add") || homeName.equals("list") || homeName.equals("del")) {
+                Messages.SETHOME_INVALID_NAME.send(player, homeName);
+                return true;
+            }
 
             if (user.getHomes().containsKey(homeName)) {
                 user.getHomes().remove(homeName);
@@ -75,12 +83,9 @@ public class HomeCommand implements CommandExecutor {
             return true;
         }
 
-//        sender.sendMessage("Teleportuejsz sie do " + args[0]);
-
         String homeName = args[0].toLowerCase();
         if (user.getHomes().containsKey(homeName)) {
             Core.getTeleportManager().teleportPlayer("Dom: " + homeName, player, user.getHomes().get(homeName), 5);
-//            Messages.HOME_SUCCESS.send((Player) sender, homeName);
             return true;
         }
 

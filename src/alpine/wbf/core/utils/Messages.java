@@ -115,6 +115,7 @@ public enum Messages {
 
     SETHOME_LIMIT("&cOsiągnąłeś limit: &7{1}&c swoich domów!"),
     SETHOME_SUCCESS("&aPomyślnie&7 zapisałeś dom: &6{1}&7.", true),
+    SETHOME_INVALID_NAME("&cNie możesz użyc nazwy &6{1}&c!", true),
 
     HOME_INVALID("&cNie masz takiego domu!", true),
     HOME_SUCCESS("&7Teleportujesz się do domu: &6{1}&7...", true),
@@ -122,7 +123,7 @@ public enum Messages {
     HOME_NONE("&cNie masz ustawionego żadnego domu!", true),
 
     DELHOME_INVALID("&cNie masz takiego domu!", true),
-    DELHOME_SUCCESS("&aPomyślnie &7usunięto twój dom: &6{1}&7."),
+    DELHOME_SUCCESS("&aPomyślnie &7usunięto twój dom: &6{1}&7.", true),
 
     DISCORD_SERVER("&7Dołącz na naszego discorda: &6{1}", true),
 
