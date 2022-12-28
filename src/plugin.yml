@@ -1,7 +1,7 @@
 api-version: 1.19
 name: WBFCore
 main: alpine.wbf.core.Core
-version: 2.5 beta
+version: 1.0.0
 authors: [ ALPINE ]
 description: Core Plugin for survival server [WBF]
 softdepend: [LuckPerms]
