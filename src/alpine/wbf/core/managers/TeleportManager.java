@@ -34,14 +34,20 @@ public class TeleportManager {
         createTeleportTask();
     }
 
-    public void teleportPlayer(String teleportName, Player player, Location toTeleport, Integer cooldown)
-    {
-        lastTeleports.putIfAbsent(player.getUniqueId(), player.getLocation());
+    public void teleportPlayer(String teleportName, Player player, Location toTeleport, Integer cooldown) {
+        UUID uuid = player.getUniqueId();
 
-        TeleportWrapper tw = new TeleportWrapper(teleportName, player, player.getLocation(), toTeleport, cooldown);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1), true);
+        if (!this.getTeleportQueue().containsKey(uuid)){
+            lastTeleports.put(player.getUniqueId(), player.getLocation());
 
-        this.getTeleportQueue().putIfAbsent(player.getUniqueId(), tw);
+            TeleportWrapper tw = new TeleportWrapper(teleportName, player, player.getLocation(), toTeleport, cooldown);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1), true);
+
+            this.getTeleportQueue().putIfAbsent(player.getUniqueId(), tw);
+        }else{
+            Messages.TELEPORT_WRAPPER_BUSY.send(player);
+        }
+
     }
 
 
