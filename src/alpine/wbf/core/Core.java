@@ -11,6 +11,7 @@ import alpine.wbf.core.commands.teleport.homes.HomeCommand;
 import alpine.wbf.core.commands.teleport.homes.SetHomeCommand;
 import alpine.wbf.core.data.CoreConfig;
 import alpine.wbf.core.listeners.*;
+import alpine.wbf.core.managers.ChatManager;
 import alpine.wbf.core.managers.PlayersManager;
 import alpine.wbf.core.managers.TeleportManager;
 import alpine.wbf.core.utils.MessageUtils;
@@ -36,6 +37,9 @@ public class Core extends JavaPlugin {
     private static @Getter
     TeleportManager teleportManager;
 
+    private static @Getter
+    ChatManager chatManager;
+
     private @Getter
     String version;
 
@@ -53,6 +57,8 @@ public class Core extends JavaPlugin {
         this.logToConsole("&2[PlayerManager] load successful");
         teleportManager = new TeleportManager();
         this.logToConsole("&2[TeleportManager] load successful");
+        chatManager = new ChatManager();
+        this.logToConsole("&2[ChatManager] load successful");
 
         registerEvents();
         registerCommands();
@@ -120,6 +126,10 @@ public class Core extends JavaPlugin {
         // Admin Commands
         this.getCommand("openechest").setExecutor(new OpenEnderChestCommand());
         this.getCommand("openinv").setExecutor(new OpenInventoryCommand());
+
+
+
+        this.getCommand("chatoff").setExecutor(new testChat());
 
         this.logToConsole("&2Commands load successful");
     }

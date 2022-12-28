@@ -22,8 +22,14 @@ public class onPlayerAsyncChat implements Listener {
     {
         Player p = event.getPlayer();
 
-        event.setFormat(MessageUtils.colorize("&7" + p.getDisplayName() + ": " + event.getMessage()));
+        if(!Core.getChatManager().chatEnable){
+            event.setCancelled(true);
+            p.sendMessage(MessageUtils.colorize("&c BŁĄD CZAT WYŁACZONY"));
 
+        }
+
+
+        event.setFormat(MessageUtils.colorize("&7" + p.getDisplayName() + ": " + event.getMessage()));
 
         if(checkRank(p, "mody-dzik")){
             event.setFormat(MessageUtils.colorize("&7[&3DZIK&7] &3" + event.getPlayer().getDisplayName() + "&7: " + event.getMessage()));

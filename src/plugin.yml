@@ -37,3 +37,6 @@ commands:
   weather:
     description: Ustawianie pogody na serwerze
     permission: wbfCore.weather
+  chatoff:
+    description: Ustawianie pogody na serwerze
+    permission: wbfCore.admin.chatoff
