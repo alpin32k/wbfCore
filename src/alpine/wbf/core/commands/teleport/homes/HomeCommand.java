@@ -1,6 +1,7 @@
 package alpine.wbf.core.commands.teleport.homes;
 
 import alpine.wbf.core.Core;
+import alpine.wbf.core.commands.teleport.TeleportWrapper;
 import alpine.wbf.core.data.CorePlayer;
 import alpine.wbf.core.utils.Messages;
 import org.bukkit.command.Command;
@@ -27,7 +28,7 @@ public class HomeCommand implements CommandExecutor {
         if(args.length == 0) {
             StringBuilder sb = new StringBuilder();
             for (String string : cp.getHomes().keySet()) {
-                sb.append(string).append(", ");
+                sb.append(string).append("&7,&6 ");
             }
             if (sb.length() <= 0) {
                 Messages.HOME_NONE.send(p);
@@ -63,11 +64,25 @@ public class HomeCommand implements CommandExecutor {
         }
 
         if(args[0].toLowerCase().equals("del")) {
-            sender.sendMessage("del");
+            String homeName = args[1].toLowerCase();
+
+            if (user.getHomes().containsKey(homeName)) {
+                user.getHomes().remove(homeName);
+                Messages.DELHOME_SUCCESS.send((Player) sender, homeName);
+                return true;
+            }
+            Messages.DELHOME_INVALID.send((Player) sender, homeName);
             return true;
         }
 
-        sender.sendMessage("Teleportuejsz sie do " + args[0]);
+//        sender.sendMessage("Teleportuejsz sie do " + args[0]);
+
+        String homeName = args[0].toLowerCase();
+        if (user.getHomes().containsKey(homeName)) {
+            Core.getTeleportManager().teleportPlayer("Dom: " + homeName, player, user.getHomes().get(homeName), 5);
+//            Messages.HOME_SUCCESS.send((Player) sender, homeName);
+            return true;
+        }
 
         return true;
     }

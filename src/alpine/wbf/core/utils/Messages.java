@@ -109,22 +109,22 @@ public enum Messages {
 //    PWEATHER_SET("&aYour weather has been set to &e{1}&a."),
 
     CRAFT_SUCCESS("&7Otwieranie przenośnego craftingu", true),
+//
+//    SOCIALSPY_TOGGLED("&eSocial Spy has been {1}&e."),
+//    SOCIALSPY_VIEW("&eSS: &8(&e{1} &7-> &e{2}&8) &7{3}"),
 
-    SOCIALSPY_TOGGLED("&eSocial Spy has been {1}&e."),
-    SOCIALSPY_VIEW("&eSS: &8(&e{1} &7-> &e{2}&8) &7{3}"),
+    SETHOME_LIMIT("&cOsiągnąłeś limit: &7{1}&c swoich domów!"),
+    SETHOME_SUCCESS("&aPomyślnie&7 zapisałeś dom: &6{1}&7.", true),
 
-    SETHOME_LIMIT("&cYou have reached your limit of &e{1}&c homes."),
-    SETHOME_SUCCESS("&aYou have set a home named &e{1}&a."),
+    HOME_INVALID("&cNie masz takiego domu!", true),
+    HOME_SUCCESS("&7Teleportujesz się do domu: &6{1}&7...", true),
+    HOME_LIST("&7Twoje domy: &6{1}", true),
+    HOME_NONE("&cNie masz ustawionego żadnego domu!", true),
 
-    HOME_INVALID("&cYou do not have a home set under that name."),
-    HOME_SUCCESS("&dTeleporting to &e{1}&d..."),
-    HOME_LIST("&aHomes: &e{1}"),
-    HOME_NONE("&cYou do not have any homes set."),
+    DELHOME_INVALID("&cNie masz takiego domu!", true),
+    DELHOME_SUCCESS("&aPomyślnie &7usunięto twój dom: &6{1}&7."),
 
-    DELHOME_INVALID("&cYou do not have a home set under that name."),
-    DELHOME_SUCCESS("&aDeleted your home &e{1}&a."),
-
-    DISCORD_SERVER("&7Dołącz na naszego discorda: &6{1}"),
+    DISCORD_SERVER("&7Dołącz na naszego discorda: &6{1}", true),
 
     INVSEE_INVALID_PLAYER("&cGracz: '&6{1}&c' nie jest online!", true),
     INVSEE_OPEN("&7Otworzyłeś ekwipunek gracza: &6{1}&7", true),
