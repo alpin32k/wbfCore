@@ -4,6 +4,7 @@ main: alpine.wbf.core.Core
 version: 2.5 beta
 authors: [ ALPINE ]
 description: Core Plugin for survival server [WBF]
+softdepend: [LuckPerms]
 commands:
   help:
     description: Pokazuje wszystkie dostępne dla Ciebie komendy
@@ -19,10 +20,10 @@ commands:
     description: Otwiera przenośny crafting table
     permission: wbfCore.craft
   spawn:
-    description: Otwiera przenośny crafting table
+    description: Teleportuje na spawn
 #    permission: wbfCore.teleport.spawn
   setspawn:
-    description: Otwiera przenośny crafting table
+    description: Zapisuje lokalizacje spawnu
     permission: wbfCore.teleport.setspawn
   home:
     description: Zarządzenie własnymi teleportami

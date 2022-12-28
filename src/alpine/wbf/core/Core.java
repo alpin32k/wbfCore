@@ -10,16 +10,15 @@ import alpine.wbf.core.commands.teleport.SpawnCommand;
 import alpine.wbf.core.commands.teleport.homes.HomeCommand;
 import alpine.wbf.core.commands.teleport.homes.SetHomeCommand;
 import alpine.wbf.core.data.CoreConfig;
-import alpine.wbf.core.listeners.onPingEvent;
-import alpine.wbf.core.listeners.onPlayerJoinEvent;
-import alpine.wbf.core.listeners.onPlayerLeaveEvent;
-import alpine.wbf.core.listeners.onPlayerRespawnEvent;
+import alpine.wbf.core.listeners.*;
 import alpine.wbf.core.managers.PlayersManager;
 import alpine.wbf.core.managers.TeleportManager;
 import alpine.wbf.core.utils.MessageUtils;
 import lombok.Getter;
+import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
@@ -40,6 +39,8 @@ public class Core extends JavaPlugin {
     private @Getter
     String version;
 
+    public @Getter LuckPerms lpAPI;
+
     @Override
     public void onEnable()
     {
@@ -55,6 +56,21 @@ public class Core extends JavaPlugin {
 
         registerEvents();
         registerCommands();
+
+// LuckPerms initiate
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            this.lpAPI = provider.getProvider();
+        }
+
+
+        this.logToConsole("");
+        this.logToConsole("&6  ┏┳━┳┳━━┳━━┓ ");
+        this.logToConsole("&6  ┃┃┃┃┃┏┓┃━┳┛  &4WBFCore &3v" + version);
+        this.logToConsole("&6  ┃┃┃┃┃┏┓┃┏┛   &7Running on Bukkit - Paper");
+        this.logToConsole("&6  ┗━┻━┻━━┻┛   ");
+        this.logToConsole("");
+
     }
     @Override
     public void onDisable() {
@@ -70,6 +86,7 @@ public class Core extends JavaPlugin {
         pluginManager.registerEvents(new onPlayerLeaveEvent(), this);
         pluginManager.registerEvents(new onPingEvent(), this);
         pluginManager.registerEvents(new onPlayerRespawnEvent(), this);
+        pluginManager.registerEvents(new onPlayerAsyncChat(), this);
 
         this.logToConsole("&2Events load successful");
     }
@@ -107,9 +124,17 @@ public class Core extends JavaPlugin {
         this.logToConsole("&2Commands load successful");
     }
 
-    public void logToConsole(String message)
+    public void logToConsole(String message) {
+        logToConsole(message, false);
+    }
+
+    public void logToConsole(String message, boolean prefixed)
     {
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.colorize(coreConfig.getPrefix() + " " + message));
+        if(prefixed){
+            Bukkit.getConsoleSender().sendMessage(MessageUtils.colorize(coreConfig.getPrefix() + " " + message));
+        }else{
+            Bukkit.getConsoleSender().sendMessage(MessageUtils.colorize(message));
+        }
     }
 
 }
