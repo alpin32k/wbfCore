@@ -37,6 +37,12 @@ public class TeleportManager {
     public void teleportPlayer(String teleportName, Player player, Location toTeleport, Integer cooldown) {
         UUID uuid = player.getUniqueId();
 
+//        if(player.hasPermission("wbfCore.teleport.countdown.bypass")){
+//            Messages.SPAWN_TELEPORT.send(player);
+//            player.teleport(toTeleport);
+//            return;
+//        }
+
         if (!this.getTeleportQueue().containsKey(uuid)){
             lastTeleports.put(player.getUniqueId(), player.getLocation());
 
